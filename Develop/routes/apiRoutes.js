@@ -13,3 +13,19 @@ router.get("/workouts", (req, res) => {
     });
 });
 
+//put request
+router.put("/workouts/:id", (req, res) => {
+  db.Workout.findByIdAndUpdate(
+    req.params.id,
+    {
+      $push: { exercises: req.body },
+    },
+    { useFindAndModify: false }
+  )
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
