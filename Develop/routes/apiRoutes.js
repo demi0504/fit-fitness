@@ -13,6 +13,16 @@ router.get("/workouts", (req, res) => {
     });
 });
 
+//post request
+router.post("/workouts", ({ body }, res) => {
+  db.Workout.create(body)
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    }).catch(err => {
+      res.json(err);
+    });
+});
+
 //put request
 router.put("/workouts/:id", (req, res) => {
   db.Workout.findByIdAndUpdate(
@@ -29,3 +39,15 @@ router.put("/workouts/:id", (req, res) => {
       res.json(err);
     });
 });
+
+//get request
+router.get("/workouts/range", (req, res) => {
+  db.Workout.find({}).sort({ day: -1 }).limit(7)
+  .then(dbWorkouts => {
+    res.json(dbWorkouts)
+  }).catch((err) => {
+    res.json(err);
+  });
+});
+
+module.exports = router;
