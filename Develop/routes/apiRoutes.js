@@ -5,8 +5,8 @@ const router = express.Router();
 //get request
 router.get("/workouts", (req, res) => {
   db.Workout.find({})
-    .then((dbWorkouts) => {
-      res.json(dbWorkouts);
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
     })
     .catch((err) => {
       res.json(err);
@@ -43,8 +43,8 @@ router.put("/workouts/:id", (req, res) => {
 //get request
 router.get("/workouts/range", (req, res) => {
   db.Workout.find({}).sort({ day: -1 }).limit(7)
-  .then(dbWorkouts => {
-    res.json(dbWorkouts)
+  .then(dbWorkout => {
+    res.json(dbWorkout)
   }).catch((err) => {
     res.json(err);
   });
